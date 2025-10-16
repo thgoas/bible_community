@@ -1,0 +1,175 @@
+<%!-- <BibleWeb.Layouts.app flash={@flash}>
+<.header>
+  Bem vindo ao Bible
+  <:subtitle>Gerencie sua anotações</:subtitle>
+</.header>
+
+<article class="prose">
+<div class="card bg-base-100 w-full shadow-sm">
+  <div class="card-body">
+  <p>
+    {@verse.chapter} : {@verse.verse} - {@verse.text}
+  </p>
+  </div>
+</div>
+</article> --%>
+
+<%!-- <div class="flex flex-col flex-wrap h-96 gap-2" >
+  <div :for={ old_book <- @old_testaments} id={"old_books  #{old_book.id}"}>
+    <p>{old_book.name}</p>
+  </div>
+  <div :for={ new_book <- @new_testaments} id={"new_books  #{new_book.id}"}>
+    <p>{new_book.name}</p>
+  </div>
+</div> --%>
+<%!-- <form>
+<select class="select w-full max-w-xs" name="book_id" phx-change="select_book">
+  <option disabled selected>Velho Testamento</option>
+  <option :for={ old_book <- @old_testaments} value={old_book.id}>{old_book.name}</option>
+</select>
+
+<select class="select w-full max-w-xs" name="book_id" phx-change="select_book">
+  <option disabled selected>Novo Testamento</option>
+  <option :for={ new_book <- @new_testaments} value={new_book.id}>{new_book.name}</option>
+</select>
+</form> --%>
+<%!-- </BibleWeb.Layouts.app> --%>
+
+<!-- lib/my_app_web/controllers/page_html/home.html.heex -->
+<BibleWeb.Layouts.app flash={@flash} current_scope={@current_scope}>
+  <div class="min-h-screen flex flex-col mt-10">
+    
+<!-- HERO SECTION -->
+    <section class="hero bg-base-200 py-16">
+      <div class="hero-content text-center">
+        <div class="max-w-xl">
+          <h1 class="text-3xl font-bold">Versículo do Dia</h1>
+          <p class="py-6 text-lg italic">
+            "Porque onde dois ou três se reúnem em meu nome, ali eu estou no meio deles." <br />
+            <span class="font-semibold">(Mateus 18:20 NVT)</span>
+          </p>
+          <div class="flex justify-center gap-4">
+            <a href="/biblia" class="btn btn-primary">📖 Ler a Bíblia</a>
+            <a href="/comunidade" class="btn btn-secondary">👥 Entrar na Comunidade</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+<!-- PEDIDOS DE ORAÇÃO -->
+    <section class="py-12 px-6 bg-base-100">
+      <h2 class="text-2xl font-bold text-center mb-8">🙏 Pedidos de Oração Recentes</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-base-200 shadow-md">
+          <div class="card-body">
+            <p>"Peço oração pela minha família..."</p>
+            <div class="card-actions justify-between mt-4">
+              <span class="badge badge-primary">12 irmãos oraram</span>
+              <button class="btn btn-sm btn-outline">Orar também</button>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-200 shadow-md">
+          <div class="card-body">
+            <p>"Estou buscando forças em Deus..."</p>
+            <div class="card-actions justify-between mt-4">
+              <span class="badge badge-primary">8 irmãos oraram</span>
+              <button class="btn btn-sm btn-outline">Orar também</button>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-200 shadow-md">
+          <div class="card-body">
+            <p>"Preciso de direção para minha vida profissional."</p>
+            <div class="card-actions justify-between mt-4">
+              <span class="badge badge-primary">5 irmãos oraram</span>
+              <button class="btn btn-sm btn-outline">Orar também</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-8">
+        <a href="/oracao" class="btn btn-primary">Peça uma Oração</a>
+      </div>
+    </section>
+    
+<!-- TESTEMUNHOS -->
+    <section class="py-12 bg-base-200">
+      <h2 class="text-2xl font-bold text-center mb-8">🌟 Testemunhos da Comunidade</h2>
+      <div class="carousel w-full max-w-3xl mx-auto rounded-lg shadow">
+        <div id="slide1" class="carousel-item relative w-full">
+          <div class="p-8 text-center">
+            <p class="text-lg">"Conheci a Cristo e minha vida mudou completamente."</p>
+            <span class="font-semibold block mt-2">– João</span>
+          </div>
+        </div>
+        <div id="slide2" class="carousel-item relative w-full">
+          <div class="p-8 text-center">
+            <p class="text-lg">"As orações dessa comunidade me deram esperança."</p>
+            <span class="font-semibold block mt-2">– Maria</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+<!-- GRUPOS DE ESTUDO -->
+    <section class="py-12 px-6 bg-base-100">
+      <h2 class="text-2xl font-bold text-center mb-8">📚 Grupos de Estudo</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-base-200 shadow">
+          <div class="card-body">
+            <h3 class="card-title">Evangelhos em 30 dias</h3>
+            <p>Leitura focada nos 4 evangelhos com reflexões diárias.</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-sm btn-primary">Entrar</button>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-200 shadow">
+          <div class="card-body">
+            <h3 class="card-title">Personagens da Bíblia</h3>
+            <p>Descubra como homens e mulheres de fé viveram a Palavra.</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-sm btn-primary">Entrar</button>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-200 shadow">
+          <div class="card-body">
+            <h3 class="card-title">Fé que Move Montanhas</h3>
+            <p>Estudo sobre confiança em Deus diante dos desafios.</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-sm btn-primary">Entrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+<!-- CALL TO ACTION -->
+    <section class="hero bg-primary text-primary-content py-16">
+      <div class="hero-content text-center">
+        <div class="max-w-xl">
+          <h2 class="text-3xl font-bold mb-4">Não caminhe sozinho</h2>
+          <p class="mb-6">Faça parte da nossa comunidade e cresça junto em Cristo.</p>
+          <a href="/cadastro" class="btn btn-secondary">Cadastre-se Agora</a>
+        </div>
+      </div>
+    </section>
+    
+<!-- FOOTER -->
+    <footer class="footer p-6 bg-neutral text-neutral-content">
+      <div class="items-center grid-flow-col">
+        <p>© 2025 Minha Comunidade Cristã</p>
+      </div>
+      <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <a href="/biblia" class="link link-hover">Bíblia</a>
+        <a href="/estudos" class="link link-hover">Estudos</a>
+        <a href="/comunidade" class="link link-hover">Comunidade</a>
+        <a href="/oracao" class="link link-hover">Oração</a>
+        <a href="/sobre" class="link link-hover">Sobre</a>
+      </div>
+    </footer>
+  </div>
+</BibleWeb.Layouts.app>
+
