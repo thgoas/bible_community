@@ -8,6 +8,11 @@ defmodule Bible.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :utc_datetime
     field :authenticated_at, :utc_datetime, virtual: true
+    field :name, :string
+    field :surname, :string
+    field :phone, :string
+    field :avatar_url, :string
+    field :congregation, :string
 
     timestamps(type: :utc_datetime)
   end
@@ -29,12 +34,20 @@ defmodule Bible.Accounts.User do
     |> validate_email(opts)
   end
 
+  def email_and_password_changeset(user, attrs, _opts \\ []) do
+    user
+    |> cast(attrs, [:email, :password])
+    |> validate_confirmation(:password, message: "does not match password")
+    |> validate_password(hash_password: false)
+    |> validate_email(validate_unique: false)
+  end
+
   defp validate_email(changeset, opts) do
     changeset =
       changeset
       |> validate_required([:email])
       |> validate_format(:email, ~r/^[^@,;\s]+@[^@,;\s]+$/,
-        message: "must have the @ sign and no spaces"
+        message: "Deve conter o caracter @ e não pode conter espaços ou vírgulas"
       )
       |> validate_length(:email, max: 160)
 

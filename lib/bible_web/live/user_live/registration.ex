@@ -24,12 +24,51 @@ defmodule BibleWeb.UserLive.Registration do
 
         <.form for={@form} id="registration_form" phx-submit="save" phx-change="validate">
           <.input
+            field={@form[:name]}
+            type="text"
+            label="Nome"
+            autocomplete="name"
+            required
+          />
+
+          <.input
+            field={@form[:surname]}
+            type="text"
+            label="Sobrenome"
+            autocomplete="surname"
+            required
+          />
+
+          <.input
+            field={@form[:phone]}
+            type="text"
+            label="Telefone"
+            autocomplete="username"
+          />
+
+          <.input
             field={@form[:email]}
             type="email"
             label="Email"
             autocomplete="username"
             required
             phx-mounted={JS.focus()}
+          />
+
+          <.input
+            field={@form[:password]}
+            type="password"
+            label="Senha"
+            autocomplete="new-password"
+            required
+          />
+
+          <.input
+            field={@form[:password_confirmation]}
+            type="password"
+            label="Confirmar Senha"
+            autocomplete="new-password"
+            required
           />
 
           <.button phx-disable-with="Creating account..." class="btn btn-primary w-full">
@@ -55,7 +94,7 @@ defmodule BibleWeb.UserLive.Registration do
 
   @impl true
   def handle_event("save", %{"user" => user_params}, socket) do
-    case Accounts.register_user(user_params) do
+    case Accounts.register_user_with_password(user_params) do
       {:ok, user} ->
         {:ok, _} =
           Accounts.deliver_login_instructions(
@@ -77,7 +116,8 @@ defmodule BibleWeb.UserLive.Registration do
   end
 
   def handle_event("validate", %{"user" => user_params}, socket) do
-    changeset = Accounts.change_user_email(%User{}, user_params, validate_unique: false)
+    # changeset = Accounts.change_user_email(%User{}, user_params, validate_unique: false)
+    changeset = Accounts.change_user_email_and_password(%User{}, user_params)
     {:noreply, assign_form(socket, Map.put(changeset, :action, :validate))}
   end
 

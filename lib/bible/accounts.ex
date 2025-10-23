@@ -80,6 +80,13 @@ defmodule Bible.Accounts do
     |> Repo.insert()
   end
 
+  def register_user_with_password(attrs) do
+    %User{}
+    |> User.email_changeset(attrs)
+    |> User.password_changeset(attrs)
+    |> Repo.insert()
+  end
+
   ## Settings
 
   @doc """
@@ -165,6 +172,11 @@ defmodule Bible.Accounts do
     user
     |> User.password_changeset(attrs)
     |> update_user_and_delete_all_tokens()
+  end
+
+  def change_user_email_and_password(user, attrs \\ %{}, _opts \\ []) do
+    user
+    |> User.email_and_password_changeset(attrs)
   end
 
   ## Session
